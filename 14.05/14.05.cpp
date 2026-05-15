@@ -43,36 +43,39 @@ int main()
 
 
 
-    std::list<int> nums;
+    DList<int>nums;
     nums.push_back(6);
     nums.push_back(4);
     nums.push_back(8);
     nums.push_back(4);
 
-    std::list<int>::iterator p;
-    std::list<int>::iterator pdel;
-    for (p = nums.begin(); p != nums.end(); )
-    {
-        pdel = p;
-        p++;
-        if (*pdel == 4)
-        {
-            cout << "DELETE: " << *pdel << " ";
-            nums.erase(pdel);
-        }
-       
-    }
-    cout << endl;
+    //std::list<int>::iterator p;
+    //std::list<int>::iterator pdel;
+    //for (p = nums.begin(); p != nums.end(); )
+    //{
+    //    pdel = p;
+    //    p++;
+    //    if (*pdel == 4)
+    //    {
+    //        cout << "DELETE: " << *pdel << " ";
+    //        nums.erase(pdel);
+    //    }
+    //   
+    //}
+    //cout << endl;
 
-    for (int a : nums)
-    {
-        cout << a << " ";
-    }
-    cout << endl;
+    
 
-
-
-
+    nums.push_front(1);
+    
+    nums.show();
+    
+    nums.insertAfter(4, 25);
+    nums.show();
+    nums.insertBefore(8, 11);
+    nums.show();
+    nums.erase(25);
+    nums.show();
 
     return 0;
 }

@@ -151,5 +151,109 @@ public:
 	}
 
 
+	void push_front(U value) 
+	{
+		DNode<U>* item = new DNode<U>(value);
+		if (head == nullptr || current == nullptr)
+		{
+			head = current = item;
+		}
+		else {
+			item->next = head;
+			head->prev = item;
+			head = item;
+		}
 
+	}
+
+
+
+	void insertBefore(U before, U value)
+	{
+		DNode<U>* p = head;
+		while (p != nullptr) {
+			if (p->info == before)
+			{
+				DNode<U>* item = new DNode<U>(value);
+				if (p == head)
+				{
+					item->next = head;
+					head->prev = item;
+					head = item;
+				}
+				else 
+				{
+					item->next = p;
+					item->prev = p->prev;
+					p->prev->next = item;
+					p->prev = item;
+				}
+				return;
+			}
+			p = p->next;
+		}
+	}
+
+
+	void insertAfter(U after, U value)
+	{
+		DNode<U>* p = head;
+		while (p != nullptr) {
+			if (p->info == after)
+			{
+				DNode<U>* item = new DNode<U>(value);
+				item->prev = p;
+					item->next = p->next;
+				if (p->next != nullptr)
+				{
+					p->next->prev = item;
+				}
+				p->next = item;
+				if (p == current)
+				{
+					current = item;
+				}
+				return;
+			}
+			p = p->next;
+		}
+	}
+
+
+
+	void erase(U value)
+	{
+		DNode<U>* p = head;
+		while (p != nullptr)
+		{
+			if (p->info == value)
+			{
+				if(p==head)
+				{
+					head = head->next;
+					if (head != nullptr)
+					{
+						head->prev = nullptr;
+					}
+				}
+				else
+				{
+					p->prev->next = p->next;
+					if (p->next != nullptr)
+					{
+						p->next->prev = p->prev;
+					}
+				}
+				if (p == current)
+				{
+					current = p->prev;
+				}
+				delete p;
+				return;
+			}
+			p = p->next;
+		}
+
+
+	}
 };
